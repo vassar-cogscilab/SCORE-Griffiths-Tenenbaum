@@ -20,3 +20,6 @@ head(DF2, n = 15)
 
 
 total <- rbind(DF1, DF2)
+print(total)
+
+write.csv(total, "C:\\Documents\\GitHub\\SCORE-Griffiths-Tenenbaum\\Analysis", row.names = F)
