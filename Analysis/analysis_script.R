@@ -17,24 +17,24 @@ question2.answer <- all.data[!(abs(all.data$question2 - mean(all.data$question2)
 question3.answer <- all.data[!(abs(all.data$question3 - mean(all.data$question3)) / sd(all.data$question3)) >3,]
 
 tea.inclusion <- all.data %>%
-  filter(category=="teacake") %>%
-  summarize(tea.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
-  mutate(tea.include = tea.answers >= 34)
+  filter(category=="teacake", question1 >= 34, question2 >= 34, question3 >= 34) %>%
+  ##summarize(tea.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
+  ##mutate(goober = question3 >= 34)
 
 toxin.inclusion <- all.data %>%
-  filter(category == "toxin") %>%
-  summarize(toxin.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
-  mutate(toxin.include = toxin.answers >= 34)
+  filter(category == "toxin", question1 >= 34, question2 >= 34, question3 >= 34) %>%
+  ##summarize(toxin.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
+  ##mutate(toxin.include = toxin.answers >= 34)
 
 train.inclusion <- all.data %>%
-  filter(category == "train") %>%
-  summarize(train.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
-  mutate(train.include = train.answers >= 103)
+  filter(category == "train", question1 >= 103, question2 >= 103, question3 >= 103) %>%
+  ##summarize(train.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
+  ##mutate(train.include = train.answers >= 103)
 
 taxi.inclusion <- all.data %>%
-  filter(category == "taxicab") %>%
-  summarize(taxi.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
-  mutate(taxi.include = taxi.answers >= 103)
+  filter(category == "taxicab", question1 >= 103, question2 >= 103, question3 >= 103) %>%
+  ##summarize(taxi.answers = all.data$question1 && all.data$question2 && all.data$question3) %>%
+  ##mutate(taxi.include = taxi.answers >= 103)
 
 final.include <- all.data %>%
   mutate(include = tea.include && toxin.include && train.include && taxi.include)
