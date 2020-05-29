@@ -41,7 +41,7 @@ final.include <- all.data %>%
   ##mutate(include = tea.include && toxin.include && train.include && taxi.include)
 
 use.participants <- final.include %>%
-  filter(include == T) %>%
+  filter(question1.answer == T, question2.answer == T, question3.answer == T) %>%
   select(category)
 
 ## Now we apply these inclusion criterias
