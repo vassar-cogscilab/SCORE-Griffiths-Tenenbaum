@@ -10,11 +10,6 @@ all.data <- read_csv('fake_data')
 ## Responses must be greater than tpast
 ## Responses must be within 3 standard deviations from the mean
 
-##group.mean <- all.data %>%
- ## all.data[abs(all.data$question1 - mean(all.data$question1)) / sd(all.data$question1) <= 3,] %>%
- ## all.data[abs(all.data$question2 - mean(all.data$question2)) / sd(all.data$question2) <= 3,] %>%
- ## all.data[abs(all.data$question3 - mean(all.data$question3)) / sd(all.data$question3) <= 3,]
-
 question1.answer <- all.data[!(abs(all.data$question1 - mean(all.data$question1)) / sd(all.data$question1)) >3,]
 
 question2.answer <- all.data[!(abs(all.data$question2 - mean(all.data$question2)) / sd(all.data$question2)) >3,]

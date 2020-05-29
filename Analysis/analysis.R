@@ -23,3 +23,4 @@ total <- rbind(DF1, DF2)
 print(total)
 
 write.csv(total, "fake_data", row.names = F)
+
