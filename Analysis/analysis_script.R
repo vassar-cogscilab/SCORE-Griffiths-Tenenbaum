@@ -37,7 +37,8 @@ taxi.inclusion <- all.data %>%
   ##mutate(taxi.include = taxi.answers >= 103)
 
 final.include <- all.data %>%
-  mutate(include = tea.include && toxin.include && train.include && taxi.include)
+  rbind(tea.inclusion, toxin.inclusion, train.inclusion, taxi.inclusion)
+  ##mutate(include = tea.include && toxin.include && train.include && taxi.include)
 
 use.participants <- final.include %>%
   filter(include == T) %>%
