@@ -59,6 +59,21 @@ train.taxi.transform <- final.include %>%
          question2.transform = question2/103,
          question3.transform = question3/103)
 
+## Create a data frame with the new transformed data added in
 final.transform <- rbind(tea.toxin.transform, train.taxi.transform)
 
+## Now we need to code for the ANOVA test
+question1.results <- aov(question1.transform ~ category, 
+      data = final.transform)
 
+summary(question1.results)
+
+question2.results <- aov(question2.transform ~ category, 
+                         data = final.transform)
+
+summary(question2.results)
+
+question3.results <- aov(question3.transform ~ category, 
+                         data = final.transform)
+
+summary(question3.results)
