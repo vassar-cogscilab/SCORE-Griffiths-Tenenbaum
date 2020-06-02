@@ -10,12 +10,6 @@ all.data <- read_csv('fake_data.csv')
 ## Responses must be greater than tpast
 ## Responses must be within 3 standard deviations from the mean
 
-##question1.answer <- all.data[!(abs(all.data$question1 - mean(all.data$question1)) / sd(all.data$question1)) >3,]
-
-##question2.answer <- all.data[!(abs(all.data$question2 - mean(all.data$question2)) / sd(all.data$question2)) >3,]
-
-##question3.answer <- all.data[!(abs(all.data$question3 - mean(all.data$question3)) / sd(all.data$question3)) >3,]
-
 info1.df <- all.data %>%
   filter(info == "1")
 
@@ -46,26 +40,9 @@ taxi.inclusion <- info.inclusion %>%
 taxi.transform <- taxi.inclusion %>%
   mutate(answer.transform = answer/103)
 
-## Create a data frame with the new transformed data added in
-##final.transform <- rbind(tea.transform, toxin.transform, train.transform, taxi.transform)
-
 ## Now we need to code for the ANOVA test
 
-##taxi.results <- aov(question1.transform + question2.transform + question3.transform ~ category, data = taxi.transform)
+taxi.results <- aov(answer.transform ~ info, data = taxi.transform)
 
-##summary(taxi.results)
+summary(taxi.results)
 
-##question1.results <- aov(question1.transform ~ category, 
-      ##data = final.transform)
-
-##summary(question1.results)
-
-##question2.results <- aov(question2.transform ~ category, 
-                         ##data = final.transform)
-
-##summary(question2.results)
-
-##question3.results <- aov(question3.transform ~ category, 
-                         ##data = final.transform)
-
-##summary(question3.results)
