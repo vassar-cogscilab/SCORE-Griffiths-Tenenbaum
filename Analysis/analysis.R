@@ -1,26 +1,14 @@
 library(tidyverse)
 
-DF1 <- data.frame(category = sample(c("teacake", "toxin"), size = 14, replace = T),
-                   question1 = sample(1:100, size = 14, replace = T),
-                   question2 = sample(1:100, size = 14, replace = T),
-                   question3 = sample(1:100, size = 14, replace = T))
+DF1 <- data.frame(subject = rep(c("1", "2", "3", "4", "5",
+                                  "6", "7", "8", "9", "10",
+                                  "11", "12", "13", "14", "15",
+                                  "16", "17", "18", "19", "20",
+                                  "21", "22", "23", "24", "25",
+                                  "26", "27", "28", "29"), each = 3),
+                  category = sample(c("taxicab"), size = 87, replace = T),
+                  info = c("1", "3", "10"),
+                  answer = sample(50:200, size = 87, replace = T))
 
-r <- sample(nrow(DF1))
-DF1 <- DF1[r, 1:4]
-head(DF1, n = 14)
-
-DF2 <- data.frame(category = sample(c("train", "taxicab"), size = 15, replace = T),
-                  question1 = sample(50:200, size = 15, replace = T),
-                  question2 = sample(50:200, size = 15, replace = T),
-                  question3 = sample(50:200, size = 15, replace = T))
-
-r <- sample(nrow(DF2))
-DF2 <- DF2[r, 1:4]
-head(DF2, n = 15)
-
-
-total <- rbind(DF1, DF2)
-print(total)
-
-write.csv(total, "fake_data", row.names = F)
+write.csv(DF1, "fake_data.csv", row.names = F)
 

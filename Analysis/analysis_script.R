@@ -10,78 +10,50 @@ all.data <- read_csv('fake_data.csv')
 ## Responses must be greater than tpast
 ## Responses must be within 3 standard deviations from the mean
 
-question1.answer <- all.data[!(abs(all.data$question1 - mean(all.data$question1)) / sd(all.data$question1)) >3,]
+##question1.answer <- all.data[!(abs(all.data$question1 - mean(all.data$question1)) / sd(all.data$question1)) >3,]
 
-question2.answer <- all.data[!(abs(all.data$question2 - mean(all.data$question2)) / sd(all.data$question2)) >3,]
+##question2.answer <- all.data[!(abs(all.data$question2 - mean(all.data$question2)) / sd(all.data$question2)) >3,]
 
-question3.answer <- all.data[!(abs(all.data$question3 - mean(all.data$question3)) / sd(all.data$question3)) >3,]
+##question3.answer <- all.data[!(abs(all.data$question3 - mean(all.data$question3)) / sd(all.data$question3)) >3,]
 
-tea.inclusion <- all.data %>%
-  filter(category=="teacake", 
-         question1 >= 34, 
-         question2 >= 34, 
-         question3 >= 34)
+info1.df <- all.data %>%
+  filter(info == "1")
 
-toxin.inclusion <- all.data %>%
-  filter(category == "toxin", 
-         question1 >= 34, 
-         question2 >= 34, 
-         question3 >= 34)
+info1.inclusion <-info1.df[!(abs(info1.df$answer - mean(info1.df$answer)) / sd(info1.df$answer)) >3,]
 
-train.inclusion <- all.data %>%
-  filter(category == "train", 
-         question1 >= 103, 
-         question2 >= 103, 
-         question3 >= 103)
+info3.df <- all.data %>%
+  filter(info == "3")
 
-taxi.inclusion <- all.data %>%
-  filter(category == "taxicab", 
-         question1 >= 103, 
-         question2 >= 103, 
-         question3 >= 103)
+info3.inclusion <-info3.df[!(abs(info3.df$answer - mean(info3.df$answer)) / sd(info3.df$answer)) >3,]
+
+info10.df <- all.data %>%
+  filter(info == "10")
+
+info10.inclusion <-info10.df[!(abs(info10.df$answer - mean(info10.df$answer)) / sd(info10.df$answer)) >3,]
+
+info.inclusion <- rbind(info1.inclusion, info3.inclusion, info10.inclusion)
+
+taxi.inclusion <- info.inclusion %>%
+  group_by(subject) %>%
+  filter((info == "1" & answer >= 103) |
+         (info == "3" & answer >= 103) |
+         (info == "10" & answer >= 103)) %>%
+  filter(subject, n() == 3)
+
 
 ## Now we apply the inclusion criteria and create an updated data frame
-final.include <- rbind(tea.inclusion, 
-                       toxin.inclusion, 
-                       train.inclusion, 
-                       taxi.inclusion)
 
-## We now need to transform the data to the form t/tpast
-tea.transform <- final.include %>%
-  filter(category == "teacake") %>%
-  mutate(question1.transform = question1/34,
-         question2.transform = question2/34,
-         question3.transform = question3/34)
-
-toxin.transform <- final.include %>%
-  filter(category == "toxin") %>%
-  mutate(question1.transform = question1/34,
-         question2.transform = question2/34,
-         question3.transform = question3/34)
-
-train.transform <- final.include %>%
-  filter(category == "train") %>%
-  mutate(question1.transform = question1/103,
-         question2.transform = question2/103,
-         question3.transform = question3/103)
-
-taxi.transform <- final.include %>%
-  filter(category == "taxi") %>%
-  mutate(question1.transform = question1/103,
-         question2.transform = question2/103,
-         question3.transform = question3/103)
+taxi.transform <- taxi.inclusion %>%
+  mutate(answer.transform = answer/103)
 
 ## Create a data frame with the new transformed data added in
-final.transform <- rbind(tea.transform, toxin.transform, train.transform, taxi.transform)
+##final.transform <- rbind(tea.transform, toxin.transform, train.transform, taxi.transform)
 
 ## Now we need to code for the ANOVA test
-final.transform$category <-factor(final.transform$category, 
-                                  levels = c("teacake", "toxin", "train", "taxicab"))
 
-formulae <- lapply(colnames(final.transform) [5:ncol(final.transform)],
-                   function(x) as.formula(paste0(x, "~ category")))
+##taxi.results <- aov(question1.transform + question2.transform + question3.transform ~ category, data = taxi.transform)
 
-lapply(formulae, function(x) summary(aov(x, data = final.transform)))
+##summary(taxi.results)
 
 ##question1.results <- aov(question1.transform ~ category, 
       ##data = final.transform)
