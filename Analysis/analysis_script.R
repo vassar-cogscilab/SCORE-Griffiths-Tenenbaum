@@ -42,7 +42,7 @@ taxi.transform <- taxi.inclusion %>%
 
 info1.mean <- mean(info1.inclusion$answer)/103
 
-info3.mean <- mean(info1.inclusion$answer)/103
+info3.mean <- mean(info3.inclusion$answer)/103
 
 info10.mean <- mean(info10.inclusion$answer)/103
 
