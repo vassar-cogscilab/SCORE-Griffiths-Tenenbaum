@@ -8,7 +8,7 @@ DF1 <- data.frame(subject = rep(c("1", "2", "3", "4", "5",
                                   "26", "27", "28", "29"), each = 3),
                   category = sample(c("taxicab"), size = 87, replace = T),
                   info = c("1", "3", "10"),
-                  answer = sample(50:200, size = 87, replace = T))
+                  answer = sample(50:460, size = 87, replace = T))
 
 write.csv(DF1, "fake_data.csv", row.names = F)
 
