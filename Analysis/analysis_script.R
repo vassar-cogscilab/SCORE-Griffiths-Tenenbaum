@@ -40,12 +40,6 @@ taxi.inclusion <- info.inclusion %>%
 taxi.transform <- taxi.inclusion %>%
   mutate(answer.transform = answer/103)
 
-info1.mean <- mean(info1.inclusion$answer)/103
-
-info3.mean <- mean(info3.inclusion$answer)/103
-
-info10.mean <- mean(info10.inclusion$answer)/103
-
 ## Now we need to code for the ANOVA test
 
 taxi.results <- aov(answer.transform ~ info, data = taxi.transform)
@@ -53,38 +47,67 @@ taxi.results <- aov(answer.transform ~ info, data = taxi.transform)
 summary(taxi.results)
 
 ## plot the results graph
-plot(x=1,
-     type = "n",
-     xlim = c(1, 10),
-     ylim = c(1, 5),
-     pch = 19,
-     xlab = "Amount of Prior Information",
-     ylab = "Predicted t/tpast",
-     main = "Results")
 
-points(x = 1,
-       y = info1.mean,
-       pch = 19,
-       col = "black")
+info1.plot <- taxi.transform %>%
+  group_by(subject, category, info, answer, answer.transform) %>%
+  filter(info == "1") %>%
+  summarize(mean = mean(info1.inclusion$answer)/103, 
+            se = sd(info1.inclusion$answer/103) / sqrt(n()))
 
-points(x = 3,
-       y = info3.mean,
-       pch = 19,
-       col = "black")
+info3.plot <- taxi.transform %>%
+  group_by(subject, category, info, answer, answer.transform) %>%
+  filter(info == "3") %>%
+  summarize(mean = mean(info3.inclusion$answer)/103, 
+            se = sd(info3.inclusion$answer/103) / sqrt(n()))
 
-points(x = 10,
-       y = info10.mean,
-       pch = 19,
-       col = "black")
+info10.plot <- taxi.transform %>%
+  group_by(subject, category, info, answer, answer.transform) %>%
+  filter(info == "10") %>%
+  summarize(mean = mean(info10.inclusion$answer)/103, 
+            se = sd(info10.inclusion$answer/103) / sqrt(n()))
 
-segments(x0 = 1,
-         y0 = info1.mean,
-         x1 = 3,
-         y1 = info3.mean,
-         col = gray(0, 0.5))
+plotting.data <- rbind(info1.plot, info3.plot, info10.plot)
 
-segments(x0 = 3,
-         y0 = info3.mean,
-         x1 = 10,
-         y1 = info10.mean,
-         col = gray(0, 0.5))
+ggplot(plotting.data, aes(x = info, y = mean)) +
+  geom_point() +
+  geom_line()
+
+# plot(x=1,
+#      type = "n",
+#      xlim = c(1, 10),
+#      ylim = c(1, 5),
+#      pch = 19,
+#      xlab = "Amount of Prior Information",
+#      ylab = "Predicted t/tpast",
+#      main = "Results")
+# 
+# points(x = 1,
+#        y = info1.mean,
+#        pch = 19,
+#        col = "black")
+# 
+# points(x = 3,
+#        y = info3.mean,
+#        pch = 19,
+#        col = "black")
+# 
+# points(x = 10,
+#        y = info10.mean,
+#        pch = 19,
+#        col = "black")
+# 
+# segments(x0 = 1,
+#          y0 = info1.mean,
+#          x1 = 3,
+#          y1 = info3.mean,
+#          col = gray(0, 0.5))
+# 
+# segments(x0 = 3,
+#          y0 = info3.mean,
+#          x1 = 10,
+#          y1 = info10.mean,
+#          col = gray(0, 0.5))
+
+## Calculate the Erlang prior
+
+##erlang.prior <-
