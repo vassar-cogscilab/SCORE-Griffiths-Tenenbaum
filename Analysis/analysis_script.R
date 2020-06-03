@@ -112,4 +112,4 @@ ggplot(plotting.data, aes(x = info, y = mean)) +
 
 sum.se <- sum(plotting.data$se)
 
-erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer)/sum.se)) / sum.se^2
+erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer))/sum.se) / sum.se^2
