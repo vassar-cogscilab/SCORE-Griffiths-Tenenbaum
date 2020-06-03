@@ -110,4 +110,6 @@ ggplot(plotting.data, aes(x = info, y = mean)) +
 
 ## Calculate the Erlang prior
 
-##erlang.prior <-
+sum.se <- sum(plotting.data$se)
+
+erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer)/sum.se)) / sum.se^2
