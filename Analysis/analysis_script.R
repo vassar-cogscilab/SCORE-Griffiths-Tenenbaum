@@ -43,8 +43,8 @@ plotting.data <- taxi.transform %>%
 
 ggplot(plotting.data, aes(x = info, y = mean)) +
   geom_pointrange(aes(ymin = mean - se, ymax = mean + se)) +
-  geom_line(aes(color = "black")) +
-  scale_color_discrete(name = "", labels = c("Participants")) +
+  geom_line(aes(y = mean, color = "Participants")) +
+  scale_color_manual(name = "", values = c("Participants" = "black")) +
   theme_bw() +
   labs(y = "Predicted t/tpast", x = "Taxicab") +
   ylim(1, 5) +
