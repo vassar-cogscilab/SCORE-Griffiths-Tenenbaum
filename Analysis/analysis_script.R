@@ -53,8 +53,7 @@ ggplot(plotting.data, aes(x = info, y = mean)) +
         legend.justification = c("right", "top"))
 
 ## Calculate the Erlang prior
-
-sum.se <- sum(plotting.data$se)
+## Will need to fill this in later once the model prediction is added
 
 erlang.pdf <- function(x, beta){
   return(x*exp(-x/beta) / (beta^2))
