@@ -30,7 +30,7 @@ taxi.transform <- taxi.inclusion %>%
 
 ## Now we need to code for the ANOVA test
 
-taxi.results <- aov(answer.transform ~ info, data = taxi.transform)
+taxi.results <- aov(answer.transform ~ factor(info), data = taxi.transform)
 
 summary(taxi.results)
 
@@ -42,13 +42,24 @@ plotting.data <- taxi.transform %>%
             se = sd(answer.transform) / sqrt(n()))
 
 ggplot(plotting.data, aes(x = info, y = mean)) +
-  geom_point() +
-  geom_line()
+  geom_pointrange(aes(ymin = mean - se, ymax = mean + se)) +
+  geom_line(aes(color = "black")) +
+  scale_color_discrete(name = "", labels = c("Participants")) +
+  theme_bw() +
+  labs(y = "Predicted t/tpast", x = "Taxicab") +
+  ylim(1, 5) +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+  theme(legend.position = c(0.95, 0.95), 
+        legend.justification = c("right", "top"))
 
 ## Calculate the Erlang prior
 
 sum.se <- sum(plotting.data$se)
 
-erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer))/sum.se) / sum.se^2
+erlang.pdf <- function(x, beta){
+  return(x*exp(-x/beta) / (beta^2))
+}
+
+##erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer))/sum.se) / sum.se^2
 
 
