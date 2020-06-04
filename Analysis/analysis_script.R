@@ -45,10 +45,11 @@ ggplot(plotting.data, aes(x = info, y = mean)) +
   geom_pointrange(aes(ymin = mean - se, ymax = mean + se)) +
   geom_line(aes(y = mean, color = "Participants")) +
   scale_color_manual(name = "", values = c("Participants" = "black")) +
+  scale_x_continuous(breaks = c(1, 3, 10)) +
   theme_bw() +
-  labs(y = "Predicted t/tpast", x = "Taxicab") +
+  labs(y = "Predicted t/tpast", x = "Number of Examples Seen") +
   ylim(1, 5) +
-  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+  theme(panel.grid = element_blank()) +
   theme(legend.position = c(0.95, 0.95), 
         legend.justification = c("right", "top"))
 
