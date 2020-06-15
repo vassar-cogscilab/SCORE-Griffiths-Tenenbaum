@@ -52,14 +52,3 @@ ggplot(plotting.data, aes(x = info, y = mean)) +
   theme(panel.grid = element_blank()) +
   theme(legend.position = c(0.95, 0.95), 
         legend.justification = c("right", "top"))
-
-## Calculate the Erlang prior
-## Will need to fill this in later once the model prediction is added
-
-erlang.pdf <- function(x, beta){
-  return(x*exp(-x/beta) / (beta^2))
-}
-
-##erlang.prior <- mean(taxi.transform$answer) * exp(-(mean(taxi.transform$answer))/sum.se) / sum.se^2
-
-
