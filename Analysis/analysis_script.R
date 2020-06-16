@@ -1,4 +1,5 @@
 library(tidyverse)
+library(ez)
 ## Loading in data
 ## We will be loading in the raw data from the experiment, which will not need to be
 ## filtered besides by the inclusion criteria which will be described below
@@ -28,11 +29,16 @@ taxi.inclusion <- all.data %>%
 taxi.transform <- taxi.inclusion %>%
   mutate(answer.transform = answer/103)
 
+taxi.transform$info <- factor(taxi.transform$info, levels = c(1.0, 3.0, 10.0))
+
 ## Now we need to code for the ANOVA test
 
-taxi.results <- aov(answer.transform ~ factor(info), data = taxi.transform)
+taxi.results <- ezANOVA(data = taxi.transform,
+                        dv = .(answer.transform),
+                        wid = .(subject),
+                        within = .(info))
 
-summary(taxi.results)
+print(taxi.results)
 
 ## plot the results graph
 
