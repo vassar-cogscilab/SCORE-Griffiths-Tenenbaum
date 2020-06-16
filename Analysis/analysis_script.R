@@ -36,7 +36,8 @@ taxi.transform$info <- factor(taxi.transform$info, levels = c(1.0, 3.0, 10.0))
 taxi.results <- ezANOVA(data = taxi.transform,
                         dv = .(answer.transform),
                         wid = .(subject),
-                        within = .(info))
+                        within = .(info),
+                        detailed = TRUE)
 
 print(taxi.results)
 
