@@ -44,6 +44,7 @@ print(taxi.results)
 ## plot the results graph
 
 plotting.data <- taxi.transform %>%
+  mutate(info = as.numeric(as.character(info))) %>%
   group_by(info) %>%
   summarize(mean = mean(answer.transform),
             se = sd(answer.transform) / sqrt(n()))
