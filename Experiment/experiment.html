@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Experiment</title>
-    <script src="jspsych-6/jspsych.js"></script>
-    <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
-    <script src="jspsych-6/plugins/jspsych-survey-text.js"></script>
-    <link href="jspsych-6/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-  </head>
-  <body></body>
-  <script>
+<head>
+  <title>Experiment</title>
+  <script src="jspsych-6/jspsych.js"></script>
+  <script src="jspsych-6/plugins/jspsych-html-keyboard-response.js"></script>
+  <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
+  <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
+  <script src="jspsych-6/plugins/jspsych-survey-text.js"></script>
+  <link href="jspsych-6/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body></body>
+<script>
 
-    /* create timeline */
-    var timeline = [];
+/* create timeline */
+var timeline = [];
 
-    //#region consent
+//#region consent
 
-  var consent = {
-    type: 'html-button-response',
-    stimulus: '<div id="consent">'+
-      '<p class="head"><span style="font-weight:bold;">VASSAR COLLEGE</span><br>'+
-      'Department of Cognitive Science<br>'+
-      'Adult Consent Form</p>'+
+var consent = {
+  type: 'html-button-response',
+  stimulus: '<div id="consent">'+
+  '<p class="head"><span style="font-weight:bold;">VASSAR COLLEGE</span><br>'+
+  'Department of Cognitive Science<br>'+
+  'Adult Consent Form</p>'+
 
-      '<p><span style="font-weight:bold;">Primary Investigator:</span> Joshua de Leeuw</p>'+
+  '<p><span style="font-weight:bold;">Primary Investigator:</span> Joshua de Leeuw</p>'+
 
-      '<p><span style="font-weight:bold;">Student Researcher(s):</span> Tessa Charles</p>'+
+  '<p><span style="font-weight:bold;">Student Researcher(s):</span> Tessa Charles</p>'+
 
-      '<p><span style="font-weight:bold;">Title of Project:</span> Replication of a research claim from Griffiths and Tenenbaum, 2011.</p>'+
+  '<p><span style="font-weight:bold;">Title of Project:</span> Replication of a research claim from Griffiths and Tenenbaum, 2011.</p>'+
 
-      '<p>This research project is part of an effort to establish the replicability of research claims in the social and behavioral sciences. We are interested in whether we can find the same results as previously published research.</p>'+
+  '<p>This research project is part of an effort to establish the replicability of research claims in the social and behavioral sciences. We are interested in whether we can find the same results as previously published research.</p>'+
 
-      '<p>You will be presented with three prompts in this experiment. After each prompt you will be instructed to enter an answer to a question posed by the prompt in the box below.</p>'+
+  '<p>You will be presented with three prompts in this experiment. After each prompt you will be instructed to enter an answer to a question posed by the prompt in the box below.</p>'+
 
-      '<p>The study will take approximately 5 minutes to complete.</p>'+
+  '<p>The study will take approximately 5 minutes to complete.</p>'+
 
-      '<p>This project is sponsored by the Department of Defense through an award to the Center for Open Science.</p>'+
+  '<p>This project is sponsored by the Department of Defense through an award to the Center for Open Science.</p>'+
 
-      '<p>Authorized representatives from the Department of Defense Human Research  Protection Program may review and/or obtain information related to your participation in this research study as part of their responsibility to protect human research subject volunteers.</p>'+
+  '<p>Authorized representatives from the Department of Defense Human Research  Protection Program may review and/or obtain information related to your participation in this research study as part of their responsibility to protect human research subject volunteers.</p>'+
 
-      '<p>De-identified (anonymous) versions of your data will be shared with the research community on the Open Science Framework (https://osf.io) upon completion of the project.</p>'+
+  '<p>De-identified (anonymous) versions of your data will be shared with the research community on the Open Science Framework (https://osf.io) upon completion of the project.</p>'+
 
-      '<p>If you have any questions or concerns about this research project you may contact Professor Josh de Leeuw at jdeleeuw@vassar.edu.</p>'+
+    '<p>If you have any questions or concerns about this research project you may contact Professor Josh de Leeuw at jdeleeuw@vassar.edu.</p>'+
 
-      '<p><span style="font-weight:bold;">Potential Risks:</span> The risk of participation in this study is minimal, meaning that the risk is no greater than the risk posed by everyday activities.</p>'+
+    '<p><span style="font-weight:bold;">Potential Risks:</span> The risk of participation in this study is minimal, meaning that the risk is no greater than the risk posed by everyday activities.</p>'+
 
-      '<p><span style="font-weight:bold;">Potential Benefits:</span> There are no benefits to participating in this study.</p>'+
+    '<p><span style="font-weight:bold;">Potential Benefits:</span> There are no benefits to participating in this study.</p>'+
 
-      '<p>I am aware, to the extent specified above, of the nature of my participation in this project and the possible risks involved or arising from it. I understand that I may withdraw my participation in this project at any time without prejudice or penalty of any kind. I hereby agree to participate in the project. (You must be at least 18 years of age to give your consent.)</p>',
+    '<p>I am aware, to the extent specified above, of the nature of my participation in this project and the possible risks involved or arising from it. I understand that I may withdraw my participation in this project at any time without prejudice or penalty of any kind. I hereby agree to participate in the project. (You must be at least 18 years of age to give your consent.)</p>',
 
     choices: ['I agree to participate'],
     margin_vertical: '20px'
@@ -58,69 +58,92 @@
 
   //#endregion
 
-    /* define welcome message trial */
-    var welcome = {
-      type: "html-keyboard-response",
-      stimulus: "Welcome to the experiment. Press any key to begin."
-    };
-    timeline.push(welcome);
+  /* define welcome message trial */
+  var welcome = {
+    type: "html-keyboard-response",
+    stimulus: "Welcome to the experiment. Press any key to begin."
+  };
+  timeline.push(welcome);
 
-/* define age trial */
-    var age_survey = {
-  type: 'survey-text',
-  questions: [
-    {prompt: '<p style="font-size:18px;">What is your age?</p>'}
-  ]
-}
-timeline.push(age_survey);
+  /* define age trial */
+  var age_survey = {
+    type: 'survey-text',
+    questions: [
+      {prompt: '<p style="font-size:18px;">What is your age?</p>'}
+    ]
+  }
+  timeline.push(age_survey);
 
-    /* define instructions trial */
+  /* define instructions trial */
 
-    /* test trials */
+  /* test trials */
 
-    var trial_1 = {
-      type: 'survey-text',
-      questions: [
-        {prompt: '<p>Imagine that your business requires you to travel by train to a certain town or city for ten weeks. When the train pulls up at the station, you get into the first taxicab you find. As you get into the cab, you notice a serial number on the rear fender of your cab. You are curious about this, and ask the driver how the cabs are labeled. He tells you that each cab is given a unique number between 1 and the total number of cabs in the company, and that each number in that range corresponds to a cab. The serial number of this particular cab is 103.</p>' +
+  var trial_1 = {
+    type: 'survey-text',
+    questions: [
+      {prompt: '<p>Imagine that your business requires you to travel by train to a certain town or city for ten weeks. When the train pulls up at the station, you get into the first taxicab you find. As you get into the cab, you notice a serial number on the rear fender of your cab. You are curious about this, and ask the driver how the cabs are labeled. He tells you that each cab is given a unique number between 1 and the total number of cabs in the company, and that each number in that range corresponds to a cab. The serial number of this particular cab is 103.</p>' +
       '<p>Please type your estimate of the total number of cabs in the company in the box below</p>'}
-      ],
-    }
+    ],
+  }
   timeline.push(trial_1);
 
-    var trial_2 = {
-      type: 'survey-text',
-      questions: [
-        {prompt: '<p>Suppose that you ride with the same cab company two more times. Each time, you note the serial number on the back of the cab that you take. Including the serial number from the first cab, the serial numbers you have seen are 103, 34, and 72.</p>' +
+  var trial_2 = {
+    type: 'survey-text',
+    questions: [
+      {prompt: '<p>Suppose that you ride with the same cab company two more times. Each time, you note the serial number on the back of the cab that you take. Including the serial number from the first cab, the serial numbers you have seen are 103, 34, and 72.</p>' +
       '<p>Please type your estimate of the total number of cabs in the company in the box below</p>'}
-      ],
-    }
-    timeline.push(trial_2);
+    ],
+  }
+  timeline.push(trial_2);
 
-    var trial_3 = {
-      type: 'survey-text',
-      questions: [
-        {prompt: '<p>Suppose that you ride with the same cab company seven more times. Each time, you note the serial number on the back of the cab that you take. After seven more taxi rides, the serial numbers you have seen, including those from the first three cab rides, are 103, 34, 72, 61, 17, 29, 101, 97, 42, and 52.</p>' +
+  var trial_3 = {
+    type: 'survey-text',
+    questions: [
+      {prompt: '<p>Suppose that you ride with the same cab company seven more times. Each time, you note the serial number on the back of the cab that you take. After seven more taxi rides, the serial numbers you have seen, including those from the first three cab rides, are 103, 34, 72, 61, 17, 29, 101, 97, 42, and 52.</p>' +
       '<p>Please type your estimate of the total number of cabs in the company in the box below</p>'}
-      ],
-    }
-    timeline.push(trial_3);
+    ],
+  }
+  timeline.push(trial_3);
 
-    /* define debrief */
+  /* define debrief */
 
-    var debrief = {
-      type: 'html-keyboard-response',
-      stimulus: '<div class="instructions">'+
-        '<p>You have completed the experiment. Thank you for participating!</p>'+
-        '<p>This is an experiment about inference and how prior information influences decision-making. One theory is that the more prior information that is given, the smaller in value predictions will become. When we are given additional information, such as numerical values, we are able to narrow the range of our prediction values. We will look at your individual answers to determine whether they show this theorized decreasing-in-value pattern. If we do in fact narrow our prediction parameters when presented with new information, then your answers to each of the prompts should reflect that.</p>'+
-        '<p><a href="https://app.prolific.co/submissions/complete?cc=5E47AAF9">Click here to finish the experiment and return to Prolific</a>. You do not need a completion code.</p>'+
-        '</div>',
-      choices: jsPsych.NO_KEYS
-    }
-    timeline.push(debrief);
+  var debrief = {
+    type: 'html-keyboard-response',
+    stimulus: '<div class="instructions">'+
+    '<p>You have completed the experiment. Thank you for participating!</p>'+
+    '<p>This is an experiment about inference and how prior information influences decision-making. One theory is that the more prior information that is given, the smaller in value predictions will become. When we are given additional information, such as numerical values, we are able to narrow the range of our prediction values. We will look at your individual answers to determine whether they show this theorized decreasing-in-value pattern. If we do in fact narrow our prediction parameters when presented with new information, then your answers to each of the prompts should reflect that.</p>'+
+    '<p><a href="https://app.prolific.co/submissions/complete?cc=5E47AAF9">Click here to finish the experiment and return to Prolific</a>. You do not need a completion code.</p>'+
+    '<button onclick = "download_csv()">Download CSV</button>'+
+    '</div>',
+    choices: jsPsych.NO_KEYS
+  }
+  timeline.push(debrief);
 
-    /* start the experiment */
-    jsPsych.init({
-  timeline: timeline
-});
+  /* start the experiment */
+  jsPsych.init({
+    timeline: timeline
+  });
+
+  var data = [
+    ['taxicab', '1'],
+    ['taxicab', '3'],
+    ['taxicab', '10']
+  ];
+
+  function download_csv(){
+    alert(jsPsych.data.get().localSave('csv', 'mydata.csv'));
+    var csv = 'category, info, answer\n';
+    data.forEach(function(row){
+      csv += row.join(',');
+      csv += "\n";
+    });
+
+    console.log(csv);
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'data.csv';
+    hiddenElement.click();
+  }
   </script>
-</html>
+  </html>
