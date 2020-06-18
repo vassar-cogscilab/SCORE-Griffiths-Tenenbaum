@@ -124,6 +124,8 @@ var consent = {
     timeline: timeline
   });
 
+    jsPsych.data.get().localSave('csv', 'mydata.csv');
+/*
   var data = [
     ['taxicab', '1'],
     ['taxicab', '3'],
@@ -131,7 +133,7 @@ var consent = {
   ];
 
   function download_csv(){
-    alert(jsPsych.data.get().localSave('csv', 'mydata.csv'));
+      jsPsych.data.get().localSave('csv', 'mydata.csv');
     var csv = 'category, info, answer\n';
     data.forEach(function(row){
       csv += row.join(',');
@@ -144,6 +146,6 @@ var consent = {
     hiddenElement.target = '_blank';
     hiddenElement.download = 'data.csv';
     hiddenElement.click();
-  }
+  }*/
   </script>
   </html>
