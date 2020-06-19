@@ -11,6 +11,12 @@
 </head>
 <body></body>
 <script>
+var myData;
+var subject_id = jsPsych.randomization.randomID(15);
+
+jsPsych.data.addProperties({
+  subject: subject_id,
+});
 
 /* create timeline */
 var timeline = [];
@@ -102,7 +108,7 @@ var consent = {
       {prompt: '<p>Suppose that you ride with the same cab company seven more times. Each time, you note the serial number on the back of the cab that you take. After seven more taxi rides, the serial numbers you have seen, including those from the first three cab rides, are 103, 34, 72, 61, 17, 29, 101, 97, 42, and 52.</p>' +
       '<p>Please type your estimate of the total number of cabs in the company in the box below</p>'}
     ],
-  }
+    }
   timeline.push(trial_3);
 
   /* define debrief */
@@ -113,29 +119,32 @@ var consent = {
     '<p>You have completed the experiment. Thank you for participating!</p>'+
     '<p>This is an experiment about inference and how prior information influences decision-making. One theory is that the more prior information that is given, the smaller in value predictions will become. When we are given additional information, such as numerical values, we are able to narrow the range of our prediction values. We will look at your individual answers to determine whether they show this theorized decreasing-in-value pattern. If we do in fact narrow our prediction parameters when presented with new information, then your answers to each of the prompts should reflect that.</p>'+
     '<p><a href="https://app.prolific.co/submissions/complete?cc=5E47AAF9">Click here to finish the experiment and return to Prolific</a>. You do not need a completion code.</p>'+
-    '<button onclick = "download_csv()">Download CSV</button>'+
+    '<p><button onclick="download_csv()">Download CSV</button></p>' +
     '</div>',
+    on_load: function(){
+      var a1 = JSON.parse(jsPsych.data.get().select('responses').values[1]);
+      var a2 = JSON.parse(jsPsych.data.get().select('responses').values[2]);
+      var a3 = JSON.parse(jsPsych.data.get().select('responses').values[3]);
+            myData = [
+              [subject_id, 'taxicab', '1', a1.Q0],
+              [subject_id, 'taxicab', '3', a2.Q0],
+              [subject_id, 'taxicab', '10', a3.Q0]
+            ];
+    },
     choices: jsPsych.NO_KEYS
   }
+
   timeline.push(debrief);
 
   /* start the experiment */
   jsPsych.init({
-    timeline: timeline
+    timeline: timeline,
   });
 
-    jsPsych.data.get().localSave('csv', 'mydata.csv');
-/*
-  var data = [
-    ['taxicab', '1'],
-    ['taxicab', '3'],
-    ['taxicab', '10']
-  ];
-
   function download_csv(){
-      jsPsych.data.get().localSave('csv', 'mydata.csv');
-    var csv = 'category, info, answer\n';
-    data.forEach(function(row){
+      //jsPsych.data.get().localSave('csv', 'experiment_data.csv');
+    var csv = 'subject, category, info, answer\n';
+    myData.forEach(function(row){
       csv += row.join(',');
       csv += "\n";
     });
@@ -144,8 +153,9 @@ var consent = {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = 'data.csv';
+    hiddenElement.download = 'experiment_data.csv';
     hiddenElement.click();
-  }*/
+}
+
   </script>
   </html>
