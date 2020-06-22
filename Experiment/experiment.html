@@ -11,7 +11,7 @@
 </head>
 <body></body>
 <script>
-var myData;
+
 var subject_id = jsPsych.randomization.randomID(15);
 
 jsPsych.data.addProperties({
@@ -105,14 +105,6 @@ var timeline = [];
   jsPsych.init({
     timeline: timeline,
   });
-
-  function download_csv(){
-    var csv = 'subject, category, info, answer\n';
-    myData.forEach(function(row){
-      csv += row.join(',');
-      csv += "\n";
-    });
-}
 
   </script>
   </html>
