@@ -27,27 +27,14 @@ var timeline = [];
   var welcome = {
     type: "html-button-response",
     stimulus: '<p>Welcome to the experiment.</p>' +
-    '<p>This research project is part of an effort to establish the replicability of research claims in the social and behavioral sciences. We are interested in whether we can find the same results as previously published research.</p>'+
     '<p>You will be presented with three prompts in this experiment. After each prompt you will be instructed to enter an answer to a question posed by the prompt in the box below.</p>'+
     '<p>Please read each question carefully before responding.</p>' +
-    '<p>The study will take approximately 5 minutes to complete.</p>',
+    '<p>The study will take up to 5 minutes to complete.</p>',
 
     choices: ['Continue'],
       margin_vertical: '20px'
   };
   timeline.push(welcome);
-
-  /* define age trial */
-  var age_survey = {
-    type: 'survey-text',
-    questions: [
-      {prompt: '<p style="font-size:18px;">What is your age?</p>', required: true}
-    ],
-    post_trial_gap: trial_wait
-  }
-  timeline.push(age_survey);
-
-  /* define instructions trial */
 
   /* test trials */
 
