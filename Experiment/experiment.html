@@ -86,16 +86,6 @@ var timeline = [];
     '<p>We will look at your individual answers to determine whether they show this theorized decreasing-in-value pattern. If we do in fact narrow our prediction parameters when presented with new information, then your answers to each of the prompts should reflect that.</p>'+
     '<p><a href="https://app.prolific.co/submissions/complete?cc=5E47AAF9">Click here to finish the experiment and return to Prolific</a>. You do not need a completion code.</p>'+
     '</div>',
-    on_load: function(){
-      var a1 = JSON.parse(jsPsych.data.get().select('responses').values[1]);
-      var a2 = JSON.parse(jsPsych.data.get().select('responses').values[2]);
-      var a3 = JSON.parse(jsPsych.data.get().select('responses').values[3]);
-            myData = [
-              [subject_id, 'taxicab', '1', a1.Q0],
-              [subject_id, 'taxicab', '3', a2.Q0],
-              [subject_id, 'taxicab', '10', a3.Q0]
-            ];
-    },
     choices: jsPsych.NO_KEYS
   }
 
