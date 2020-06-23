@@ -7,6 +7,8 @@
   <script src="jspsych-6/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
   <script src="jspsych-6/plugins/jspsych-survey-text.js"></script>
+  <script src="jspsych-6/plugins/jspsych-call-function.js"></script>
+  <script src="jspsych-6/serverComm.js"></script>
   <link href="jspsych-6/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body></body>
@@ -71,9 +73,17 @@ var timeline = [];
       '<p>Please type your estimate of the total number of cabs in the company in the box below.</p>', required: true}
     ],
     data: {info:10},
-    post_trial_gap: trial_wait
-    }
+    post_trial_gap: trial_wait,
+}
   timeline.push(trial_3);
+
+  var save_data = {
+    type: 'call-function',
+    func: function(){
+    serverComm.save_data(jsPsych.data.get().values());
+  }
+  }
+  timeline.push(save_data);
 
   /* define debrief */
 
@@ -86,14 +96,13 @@ var timeline = [];
     '<p>We will look at your individual answers to determine whether they show this theorized decreasing-in-value pattern. If we do in fact narrow our prediction parameters when presented with new information, then your answers to each of the prompts should reflect that.</p>'+
     '<p><a href="https://app.prolific.co/submissions/complete?cc=5E47AAF9">Click here to finish the experiment and return to Prolific</a>. You do not need a completion code.</p>'+
     '</div>',
-    choices: jsPsych.NO_KEYS
+    choices: jsPsych.NO_KEYS,
   }
-
   timeline.push(debrief);
 
   /* start the experiment */
   jsPsych.init({
-    timeline: timeline,
+    timeline: timeline
   });
 
   </script>
