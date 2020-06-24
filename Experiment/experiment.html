@@ -8,13 +8,14 @@
   <script src="jspsych-6/plugins/jspsych-html-button-response.js"></script>
   <script src="jspsych-6/plugins/jspsych-survey-text.js"></script>
   <script src="jspsych-6/plugins/jspsych-call-function.js"></script>
-  <script src="jspsych-6/serverComm.js"></script>
+  <script src="js/serverComm.js"></script>
   <link href="jspsych-6/css/jspsych.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body></body>
 <script>
 
-var subject_id = jsPsych.randomization.randomID(15);
+var prolific_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+var subject_id = typeof prolific_id == 'undefined' ? jsPsych.randomization.randomID(20) : prolific_id;
 
 jsPsych.data.addProperties({
   subject: subject_id,
