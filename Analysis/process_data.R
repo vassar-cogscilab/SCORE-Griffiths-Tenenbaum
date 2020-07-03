@@ -13,4 +13,6 @@ minusRow <- converted_data[-c(1),]%>%
 
 
 Nth.delete<-function(dataframe, n)dataframe[-(seq(n,to=nrow(dataframe),by=n)),]
-Nth.delete(minusRow, 4)
+
+
+write.csv(Nth.delete(minusRow, 4), "experiment_data.csv", row.names = F)
