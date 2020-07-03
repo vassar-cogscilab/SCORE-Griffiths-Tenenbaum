@@ -1,7 +1,7 @@
 library(jsonlite)
 library(tidyverse)
 
-json_data <- fromJSON("test_fake_data.json")
+json_data <- fromJSON("fake_experiment_data.json")
 
 converted_data = subset(json_data, select = -c(row, rt, stimulus, button_pressed,
                                                trial_type, trial_index, time_elapsed))
@@ -13,4 +13,4 @@ minusRow <- converted_data[-c(1),]%>%
 
 
 Nth.delete<-function(dataframe, n)dataframe[-(seq(n,to=nrow(dataframe),by=n)),]
-Nth.delete(minusRow, 5)
+Nth.delete(minusRow, 4)
