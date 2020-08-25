@@ -18,7 +18,7 @@ write.csv(DF1, "fake_data.csv", row.names = F)
 ## We will be loading in the raw data from the experiment, which will not need to be
 ## filtered besides by the inclusion criteria which will be described below
 
-all.data <- read_csv('fake_data.csv')
+all.data <- read_csv('data/score-data-batch-1.csv')
 
 ## Inclusion Criteria
 ## Inclusion requires that:

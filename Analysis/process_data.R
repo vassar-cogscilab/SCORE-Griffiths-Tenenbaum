@@ -1,7 +1,7 @@
 library(jsonlite)
 library(tidyverse)
 
-json_data <- fromJSON("fake_experiment_data.json")
+json_data <- fromJSON("data/score-data-batch-1.json")
 
 converted_data = subset(json_data, select = -c(row, rt, stimulus, button_pressed,
                                                trial_type, trial_index, time_elapsed))
@@ -15,4 +15,4 @@ minusRow <- converted_data[-c(1),]%>%
 Nth.delete<-function(dataframe, n)dataframe[-(seq(n,to=nrow(dataframe),by=n)),]
 
 
-write.csv(Nth.delete(minusRow, 4), "experiment_data.csv", row.names = F)
+write.csv(Nth.delete(minusRow, 4), "data/score-data-batch-1.csv", row.names = F)
